@@ -22,6 +22,8 @@ export default async function Movie({
   const res = await fetch(url, options);
   const movie = await res.json();
 
+  console.log(movie)
+
   return (
     <div className="relative w-full h-screen">
       <Image
@@ -31,6 +33,13 @@ export default async function Movie({
         className="object-cover"
         priority
       />
+
+      <div className="absolute inset-0 bg-black/50 z-0" />
+
+      <main className="relative flex flex-col items-center justify-center pt-32">
+        <h1 className="text-6xl">{movie.title}</h1>
+
+      </main>
     </div>
   );
 }

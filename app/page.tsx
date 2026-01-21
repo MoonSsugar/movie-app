@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Movie {
   id: number;
@@ -16,7 +17,7 @@ export default async function Home() {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZWZhYzQxNzJiYThiOWJhMmNmZWU3YTljZDc4NDYzYiIsIm5iZiI6MTc2ODY1ODg4NS43MjYsInN1YiI6IjY5NmI5N2M1NDkyMjc1YjJkNDhmYzViMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.l_2cCpIDlOhemQPaV906w5W8A2_nPoeMuams47v-pMI",
+        `Bearer ${process.env.TMDB_TOKEN}`,
     },
   };
 
@@ -29,9 +30,11 @@ export default async function Home() {
         return (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             <div className="bg-green-50 rounded-xl flex flex-col gap-3 p-4">
-              <img
+              <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt="poster"
+                width={500}
+                height={500}
               />
 
               <h1>Title: {movie.title}</h1>
