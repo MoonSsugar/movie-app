@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { CircleUserIcon } from "lucide-react";
+import NavItem from "./NavItem";
 
 export default function Header() {
   const [scrollDirection, setScrollDirection] = useState("");
@@ -44,13 +45,61 @@ export default function Header() {
     >
       <div className="h-16 w-full bg-[#021e34] p-5">
         <div className="flex justify-between max-w-300 mx-auto">
-          <ul className="flex gap-3">
+          <ul className="flex gap-7">
             <li>
               <Link href="/">Movie App</Link>
             </li>
-            <li>Movies</li>
-            <li>TV Shows</li>
-            <li>People</li>
+            <NavItem
+              title="Movies"
+              links={[
+                {
+                  name: "Popular",
+                  href: "/movie",
+                },
+                {
+                  name: "Now Playing",
+                  href: "/movie/now-playing",
+                },
+                {
+                  name: "Upcoming",
+                  href: "/movie/upcoming",
+                },
+                {
+                  name: "Top Rated",
+                  href: "/movie/top-rated",
+                },
+              ]}
+            />
+            <NavItem
+              title="TV Shows"
+              links={[
+                {
+                  name: "Popular",
+                  href: "/tv",
+                },
+                {
+                  name: "Airing Today",
+                  href: "/tv/airing-today",
+                },
+                {
+                  name: "Upcoming",
+                  href: "/tv/on-the-air",
+                },
+                {
+                  name: "Top Rated",
+                  href: "/tv/top-rated",
+                },
+              ]}
+            />
+            <NavItem
+              title="People"
+              links={[
+                {
+                  name: "Popular",
+                  href: "/person",
+                },
+              ]}
+            />
           </ul>
           <ul className="flex">
             <li>
