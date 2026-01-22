@@ -22,8 +22,6 @@ export default async function Movie({
   const res = await fetch(url, options);
   const movie = await res.json();
 
-  console.log(movie)
-
   return (
     <div className="relative w-full h-screen">
       <Image
