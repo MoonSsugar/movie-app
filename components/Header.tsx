@@ -41,71 +41,73 @@ export default function Header() {
 
   return (
     <header
-      className={`flex flex-col w-full fixed z-50 top-0 left-0 transition-transform ${isVisible ? "translate-y-0" : "-translate-y-16"} duration-300 ease-in-out`}
+      className={`flex flex-col w-full fixed z-50 top-0 left-0 transition-transform ${isVisible ? "translate-y-0" : "-translate-y-18"} duration-300 ease-in-out`}
     >
-      <div className="h-16 w-full bg-[#021e34] p-5">
+      <div className="h-18 w-full bg-[#021e34] p-5">
         <div className="flex justify-between max-w-300 mx-auto">
-          <ul className="flex gap-7">
-            <li>
-              <Link href="/">Movie App</Link>
-            </li>
-            <NavItem
-              title="Movies"
-              links={[
-                {
-                  name: "Popular",
-                  href: "/movie",
-                },
-                {
-                  name: "Now Playing",
-                  href: "/movie/now-playing",
-                },
-                {
-                  name: "Upcoming",
-                  href: "/movie/upcoming",
-                },
-                {
-                  name: "Top Rated",
-                  href: "/movie/top-rated",
-                },
-              ]}
-            />
-            <NavItem
-              title="TV Shows"
-              links={[
-                {
-                  name: "Popular",
-                  href: "/tv",
-                },
-                {
-                  name: "Airing Today",
-                  href: "/tv/airing-today",
-                },
-                {
-                  name: "Upcoming",
-                  href: "/tv/on-the-air",
-                },
-                {
-                  name: "Top Rated",
-                  href: "/tv/top-rated",
-                },
-              ]}
-            />
-            <NavItem
-              title="People"
-              links={[
-                {
-                  name: "Popular",
-                  href: "/person",
-                },
-              ]}
-            />
-          </ul>
-          <ul className="flex">
-            <li>
-              <CircleUserIcon size={30} />
-            </li>
-          </ul>
+          <div className="flex items-baseline gap-10">
+            <Link href="/" className="text-2xl font-bold bg-linear-to-r text-transparent bg-clip-text from-green-300 to-cyan-400 opacity-90">Movie App</Link>
+
+            <nav>
+              <ul className="flex gap-6">
+                <NavItem
+                  title="Movies"
+                  links={[
+                    {
+                      name: "Popular",
+                      href: "/movie",
+                    },
+                    {
+                      name: "Now Playing",
+                      href: "/movie/now-playing",
+                    },
+                    {
+                      name: "Upcoming",
+                      href: "/movie/upcoming",
+                    },
+                    {
+                      name: "Top Rated",
+                      href: "/movie/top-rated",
+                    },
+                  ]}
+                />
+                <NavItem
+                  title="TV Shows"
+                  links={[
+                    {
+                      name: "Popular",
+                      href: "/tv",
+                    },
+                    {
+                      name: "Airing Today",
+                      href: "/tv/airing-today",
+                    },
+                    {
+                      name: "Upcoming",
+                      href: "/tv/on-the-air",
+                    },
+                    {
+                      name: "Top Rated",
+                      href: "/tv/top-rated",
+                    },
+                  ]}
+                />
+                <NavItem
+                  title="People"
+                  links={[
+                    {
+                      name: "Popular",
+                      href: "/person",
+                    },
+                  ]}
+                />
+              </ul>
+            </nav>
+          </div>
+
+          <div className="flex items-center text-white">
+            <CircleUserIcon size={30}/>
+          </div>
         </div>
       </div>
 
