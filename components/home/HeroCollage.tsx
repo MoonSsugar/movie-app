@@ -1,12 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
-interface Movie {
-  id: number;
-  title: string;
-  original_language: string;
-  poster_path: string;
-}
+import type { Movie } from "@/types/types";
 
 export default async function HeroCollage() {
   const url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
@@ -26,7 +20,7 @@ export default async function HeroCollage() {
   return (
     <section className="w-full h-112.5">
       <div className="relative flex max-w-325 mx-auto h-full w-full">
-        <div className="absolute top-30 left-10 z-20 flex flex-col gap-6">
+        <div className="absolute top-30 left-10 z-20 flex flex-col gap-6 text-white">
           <div>
             <h1 className="text-6xl font-bold bg-radial text-transparent bg-clip-text from-pink-300 to-purple-400 ">
               That&apos;s a <br />
