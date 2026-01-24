@@ -1,6 +1,6 @@
-import MovieCard from "../MovieCard";
-import TrendingToggle from "./TrendingToggle";
-import type { Movie } from "@/types/types";
+import MovieCard from "../MediaCard";
+import SlidingTabBar from "./SlidingTabBar";
+import type { MediaType } from "@/types/types";
 
 interface TrendingCarouselProps {
   timeWindow: string;
@@ -24,12 +24,25 @@ export default async function TrendingCarousel({
 
   return (
     <section className="w-full pt-10">
-      <div className="max-w-325 mx-auto">
-        <TrendingToggle initialTimeWindow={timeWindow}/> 
+      <div className="max-w-300 mx-auto">
+        <SlidingTabBar 
+          title="Trending"
+          categorie="trending"
+          tabs={[
+            {
+              id: "day",
+              name: "Today"
+            },
+            {
+              id: "week",
+              name: "This Week"
+            }
+          ]}
+        /> 
 
         <div className="flex overflow-x-auto gap-5 pb-3 pt-6 snap-x">
-          {trendingMovies.results.map((movie: Movie) => {
-            return <MovieCard key={movie.id} movie={movie} />;
+          {trendingMovies.results.map((media: MediaType) => {
+            return <MovieCard key={media.id} media={media} />;
           })}
         </div>
       </div>
