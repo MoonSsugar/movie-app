@@ -1,0 +1,43 @@
+import Image from "next/image";
+import Link from "next/link";
+import { formateDate } from "@/lib/formateDate";
+import RatingCircle from "./RatingCircle";
+import type { MediaCardProps } from "@/types/types";
+
+export default function MovieCard({ media }: MediaCardProps) {
+  return (
+    <div className="flex flex-col gap-4 relative">
+      <Link
+        href={`/${media.media_type}/${media.id}`}
+        className="relative block min-w-[150px] h-[225px]"
+      >
+        <Image
+          src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
+          alt="poster"
+          fill
+          className="object-cover rounded-xl"
+          sizes="150px"
+        />
+        <div className="absolute -bottom-4 left-2 z-10">
+          <RatingCircle
+            size={35}
+            percentage={
+              media.vote_average > 0 ? Math.round(media.vote_average * 10) : 0
+            }
+          />
+        </div>
+      </Link>
+
+      <div className="flex flex-col gap-1">
+        <h1 className="font-semibold">
+          <Link href={`/${media.media_type}/${media.id}`}>
+            {media.title || media.name}
+          </Link>
+        </h1>
+        <p className="text-gray-400">
+          {formateDate(media.release_date || (media.first_air_date as string))}
+        </p>
+      </div>
+    </div>
+  );
+}
