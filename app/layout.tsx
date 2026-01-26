@@ -1,4 +1,5 @@
 import Header from "@/components/header/Header";
+import MainContainer from "@/components/MainContainer";
 import "./globals.css";
 
 export default function RootLayout({
@@ -11,7 +12,9 @@ export default function RootLayout({
       <body>
         <Header />
 
-        <main className="pt-30">{children}</main>
+        <MainContainer>
+          {children}
+        </MainContainer>
       </body>
     </html>
   );

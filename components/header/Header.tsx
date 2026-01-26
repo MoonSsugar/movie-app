@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { CircleUserIcon } from "lucide-react";
 import NavItem from "./NavItem";
@@ -7,6 +8,7 @@ import NavItem from "./NavItem";
 export default function Header() {
   const [scrollDirection, setScrollDirection] = useState("");
   const [isVisible, setIsVisible] = useState(true);
+  const pathName = usePathname();
 
   const SCROLL_THRESHOLD = 5;
 
@@ -111,7 +113,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="relative w-full bg-white border-b border-gray-400">
+      { pathName === "/" ? <div className="relative w-full bg-white border-b border-gray-400">
         <form className="max-w-300 mx-auto">
           <input
             type="text"
@@ -119,7 +121,7 @@ export default function Header() {
             className="w-full text-gray-400 outline-none py-3"
           />
         </form>
-      </div>
+      </div> : ""}
     </header>
   );
 }
