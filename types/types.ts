@@ -1,14 +1,54 @@
+// COMMON TYPES
+interface ProductionCountry {
+  iso_3166_1: string,
+  name: string
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface ImportantMember {
+  id: number,
+  original_name: string,
+  job: string,
+}
+
+// MEDIA & CARDS
 export interface MediaType {
   id: number,
   title: string,
   poster_path: string,
+  backdrop_path: string,
   release_date: string,
   vote_average: number,
   media_type: string,
   first_air_date?: string,
-  name?: string
+  name?: string,
+  production_countries: ProductionCountry[],
+  genres: Genre[],
+  runtime: number,
+  tagline: string,
+  overview: string,
+  credits: Credits
 }
 
-export interface MediaCardProps {
-  media: MediaType
+// CREDITS (CAST & CREW)
+export interface CastMember {
+  id: number,
+  name: string,
+  original_name: string,
+  job: string,
+}
+
+export interface CrewMember {
+  id: number,
+  job: string,
+  original_name: string
+}
+
+export interface Credits {
+  cast: CastMember[],
+  crew: CrewMember[]
 }

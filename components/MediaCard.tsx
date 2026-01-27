@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { formateDate } from "@/lib/formateDate";
 import RatingCircle from "./RatingCircle";
-import type { MediaCardProps } from "@/types/types";
+import type { MediaType } from "@/types/types";
+
+interface MediaCardProps {
+  media: MediaType
+}
 
 export default function MovieCard({ media }: MediaCardProps) {
   return (
