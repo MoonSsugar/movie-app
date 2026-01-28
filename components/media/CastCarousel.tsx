@@ -9,8 +9,6 @@ export default function CastCarousel({ cast }: CastCarouselProps) {
 
   const mainCast = cast.length > 20 ? cast.slice(0, 20) : cast;
 
-  console.log(mainCast)
-
   return (
     <section className="w-full mt-5">
       <div className="max-w-300 mx-auto">

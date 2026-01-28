@@ -14,6 +14,7 @@ export default function MemberCard({ member }: MemberCardProps) {
           alt="profile"
           fill
           className="object-cover rounded-xl"
+          sizes="150px"
         />
       </div>
       <div className="flex flex-col">

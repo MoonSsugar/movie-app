@@ -1,4 +1,4 @@
-import MovieCard from "../MediaCard";
+import MediaCard from "../MediaCard";
 import SlidingTabBar from "./SlidingTabBar";
 import type { MediaType } from "@/types/types";
 
@@ -44,7 +44,7 @@ export default async function TrendingCarousel({
 
         <div className="flex overflow-x-auto gap-5 pb-3 pt-6 snap-x">
           {trendingMovies.results.map((media: MediaType) => {
-            return <MovieCard key={media.id} media={media} />;
+            return <MediaCard key={media.id} media={media} />;
           })}
         </div>
       </div>

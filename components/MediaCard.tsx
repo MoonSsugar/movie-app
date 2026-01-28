@@ -9,7 +9,7 @@ interface MediaCardProps {
   tab?: string
 }
 
-export default function MovieCard({ media, tab }: MediaCardProps) {
+export default function MediaCard({ media, tab }: MediaCardProps) {
   const mediaType = tab === "tv" ? "tv" : "movie";
 
   return (
