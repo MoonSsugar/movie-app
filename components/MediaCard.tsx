@@ -5,14 +5,17 @@ import RatingCircle from "./RatingCircle";
 import type { MediaType } from "@/types/types";
 
 interface MediaCardProps {
-  media: MediaType
+  media: MediaType,
+  tab?: string
 }
 
-export default function MovieCard({ media }: MediaCardProps) {
+export default function MovieCard({ media, tab }: MediaCardProps) {
+  const mediaType = tab === "tv" ? "tv" : "movie";
+
   return (
     <div className="flex flex-col gap-4 relative">
       <Link
-        href={`/${media.media_type}/${media.id}`}
+        href={`/${(media.media_type || mediaType)}/${media.id}`}
         className="relative block min-w-[150px] h-[225px]"
       >
         <Image
@@ -34,7 +37,7 @@ export default function MovieCard({ media }: MediaCardProps) {
 
       <div className="flex flex-col gap-1">
         <h1 className="font-semibold">
-          <Link href={`/${media.media_type}/${media.id}`}>
+          <Link href={`/${(media.media_type || mediaType)}/${media.id}`}>
             {media.title || media.name}
           </Link>
         </h1>

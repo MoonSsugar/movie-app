@@ -31,9 +31,10 @@ export interface MediaType {
 // CREDITS (CAST & CREW)
 export interface CastMember {
   id: number,
-  name: string,
   original_name: string,
+  character: string,
   job: string,
+  profile_path: string
 }
 
 export interface CrewMember {
@@ -53,3 +54,4 @@ export interface Video {
   key: string,
   type: string
 }
+

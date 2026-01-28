@@ -6,9 +6,10 @@ import { CircleUserIcon } from "lucide-react";
 import NavItem from "./NavItem";
 
 export default function Header() {
+  const pathName = usePathname();
   const [scrollDirection, setScrollDirection] = useState("");
   const [isVisible, setIsVisible] = useState(true);
-  const pathName = usePathname();
+  const [currentPathName, setCurrentPathName] = useState(pathName);
 
   const SCROLL_THRESHOLD = 5;
 
@@ -36,10 +37,19 @@ export default function Header() {
       lastScroll = scrollY > 0 ? scrollY : 0;
     };
 
+    const showHeaderAfterSwitch = () => {
+      if (pathName !== currentPathName) {
+        setIsVisible(true);
+        return setCurrentPathName(pathName);
+      }
+    }
+
+    showHeaderAfterSwitch();
+
     window.addEventListener("scroll", updateScrollDirection);
 
     return () => window.removeEventListener("scroll", updateScrollDirection);
-  }, [scrollDirection]);
+  }, [scrollDirection, currentPathName, pathName]);
 
   return (
     <header

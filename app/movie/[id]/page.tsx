@@ -1,4 +1,5 @@
 import HeroSection from "@/components/media/HeroSection";
+import CastCarousel from "@/components/media/CastCarousel";
 import type { Video } from "@/types/types";
 
 export default async function MoviePage({
@@ -24,10 +25,12 @@ export default async function MoviePage({
   const trailer = movie.videos.results.find(
     (video: Video) => video.type === "Trailer",
   );
+  console.log(movie)
 
   return (
     <>
       <HeroSection movie={movie} trailerKey={trailer.key} />
+      <CastCarousel cast={movie.credits.cast}/>
     </>
   );
 }

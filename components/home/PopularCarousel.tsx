@@ -64,7 +64,7 @@ export default async function PopularCarousel({
 
         <div className="flex overflow-x-auto gap-5 pb-3 pt-6 snap-x">
           {popularMedias.results.map((media: MediaType) => {
-            return <MovieCard key={media.id} media={media}/> 
+            return <MovieCard key={media.id} media={media} tab={popularTab}/> 
           })}
         </div>
       </div>
