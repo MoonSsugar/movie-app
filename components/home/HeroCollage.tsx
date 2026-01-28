@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Movie } from "@/types/types";
+import type { MediaType } from "@/types/types";
 
 export default async function HeroCollage() {
   const url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
@@ -39,12 +39,12 @@ export default async function HeroCollage() {
             </Link>
           </div>
         </div>
-        {trendingMovies.map((movie: Movie) => {
+        {trendingMovies.map((media: MediaType) => {
           return (
-            <div key={movie.id} className="flex flex-1 relative">
+            <div key={media.id} className="flex flex-1 relative">
               <div className="absolute w-full h-full bg-black/50 z-10" />
               <Image
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original${media.poster_path}`}
                 alt="img"
                 fill
                 className="object-cover"

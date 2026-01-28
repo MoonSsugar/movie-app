@@ -1,30 +1,40 @@
+"use client";
 import Image from "next/image";
-import RatingCircle from "@/components/RatingCircle";
+import { useState } from "react";
 import { formateFullDate } from "@/lib/formateFullDate";
 import { formateRuntime } from "@/lib/formateRuntime";
-import type { MediaType, Genre, ImportantMember } from "@/types/types";
+import RatingCircle from "@/components/RatingCircle";
+import TrailerModal from "./TrailerModal";
+import type { MediaType, Genre } from "@/types/types";
 
 interface HeroSectionProps {
   movie: MediaType;
+  trailerKey: string;
 }
 
 interface UniqueCrew {
   [key: number]: {
-    name: string,
-    jobs: string[]
-  }
+    name: string;
+    jobs: string[];
+  };
 }
 
 interface UniqueMember {
-  name: string,
-  jobs: string[]
+  name: string;
+  jobs: string[];
 }
 
-export default function HeroSection({ movie }: HeroSectionProps) {
+export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const releaseDate = movie.release_date.split("-");
+  const country = movie.production_countries[0].iso_3166_1 || "US";
 
   const importantMembers = movie.credits.crew.filter(
-    (member) => member.job === "Director" || member.job === "Screenplay" || member.job === "Writer",
+    (member) =>
+      member.job === "Director" ||
+      member.job === "Screenplay" ||
+      member.job === "Writer",
   );
 
   const uniqueCrew: UniqueCrew = {};
@@ -33,14 +43,13 @@ export default function HeroSection({ movie }: HeroSectionProps) {
     if (!uniqueCrew[member.id]) {
       uniqueCrew[member.id] = {
         name: member.original_name,
-        jobs: [member.job]
-      }
+        jobs: [member.job],
+      };
     } else {
-      uniqueCrew[member.id].jobs.push(member.job)
+      uniqueCrew[member.id].jobs.push(member.job);
     }
   }
 
-  const country = movie.production_countries[0].iso_3166_1 || "US";
   return (
     <section className="w-full">
       <div className="relative">
@@ -78,20 +87,33 @@ export default function HeroSection({ movie }: HeroSectionProps) {
             <div className="flex items-center mt-5">
               <RatingCircle
                 size={70}
-                percentage={Math.round(movie.vote_average) * 10}
+                percentage={Math.floor(movie.vote_average * 10)}
               />
               <h1 className="ml-2 font-semibold text-xl">
                 User <br /> Score
               </h1>
             </div>
 
-            <div className="mt-3">
-              <button className="text-xl px-4 py-1 hover:underline hover:text-gray-400 transform duration-300 cursor-pointer">
-                Play Trailer
-              </button>
-            </div>
+            {trailerKey ? (
+              <div className="mt-3">
+                <button
+                  className="text-xl px-4 py-1 hover:underline hover:text-gray-400 transform duration-300 cursor-pointer"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Play Trailer
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
 
-            <p className="text-xl text-neutral-400 italic py-5">{movie.tagline}</p>
+            {isOpen && (
+              <TrailerModal trailerKey={trailerKey} setIsOpen={setIsOpen} />
+            )}
+
+            <p className="text-xl text-neutral-400 italic py-5">
+              {movie.tagline}
+            </p>
 
             <div>
               <h1 className="font-semibold text-xl">Overview</h1>
@@ -102,10 +124,12 @@ export default function HeroSection({ movie }: HeroSectionProps) {
               {Object.values(uniqueCrew).map((member: UniqueMember) => {
                 return (
                   <div key={member.name}>
-                    <h1 className="font-bold underline decoration-1 decoration-gray-500">{member.name}</h1>
+                    <h1 className="font-bold underline decoration-1 decoration-gray-500">
+                      {member.name}
+                    </h1>
                     <p className="text-sm">{member.jobs.join(", ")} </p>
                   </div>
-                )
+                );
               })}
             </div>
           </div>

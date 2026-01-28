@@ -1,4 +1,5 @@
-import HeroSection from "@/components/movie/HeroSection";
+import HeroSection from "@/components/media/HeroSection";
+import type { Video } from "@/types/types";
 
 export default async function MoviePage({
   params,
@@ -7,7 +8,7 @@ export default async function MoviePage({
 }) {
   const { id } = await params;
 
-  const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits`;
+  const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits,videos`;
 
   const options = {
     method: "GET",
@@ -20,10 +21,13 @@ export default async function MoviePage({
 
   const res = await fetch(url, options);
   const movie = await res.json();
+  const trailer = movie.videos.results.find(
+    (video: Video) => video.type === "Trailer",
+  );
 
   return (
     <>
-      <HeroSection movie={movie}/>
+      <HeroSection movie={movie} trailerKey={trailer.key} />
     </>
   );
 }

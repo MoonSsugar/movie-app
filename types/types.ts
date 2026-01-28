@@ -9,12 +9,6 @@ export interface Genre {
   name: string;
 }
 
-export interface ImportantMember {
-  id: number,
-  original_name: string,
-  job: string,
-}
-
 // MEDIA & CARDS
 export interface MediaType {
   id: number,
@@ -51,4 +45,11 @@ export interface CrewMember {
 export interface Credits {
   cast: CastMember[],
   crew: CrewMember[]
+}
+
+// Video
+export interface Video {
+  name: string,
+  key: string,
+  type: string
 }

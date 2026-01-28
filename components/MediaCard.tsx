@@ -26,7 +26,7 @@ export default function MovieCard({ media }: MediaCardProps) {
           <RatingCircle
             size={35}
             percentage={
-              media.vote_average > 0 ? Math.round(media.vote_average * 10) : 0
+              media.vote_average > 0 ? Math.floor(media.vote_average * 10) : 0
             }
           />
         </div>
