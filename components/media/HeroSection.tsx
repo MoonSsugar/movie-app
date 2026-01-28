@@ -28,7 +28,7 @@ export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const releaseDate = movie.release_date.split("-");
-  const country = movie.production_countries[0].iso_3166_1 || "US";
+  const country = movie.production_countries[0]?.iso_3166_1 || "US";
 
   const importantMembers = movie.credits.crew.filter(
     (member) =>
