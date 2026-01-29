@@ -3,12 +3,14 @@ import type { MediaType } from "@/types/types";
 
 interface RecommendationsCarouselProps {
   id: string;
+  type: string;
 }
 
 export default async function RecommendationsCarousel({
   id,
+  type
 }: RecommendationsCarouselProps) {
-  const url = `https://api.themoviedb.org/3/movie/${id}/recommendations`;
+  const url = `https://api.themoviedb.org/3/${type}/${id}/recommendations`;
 
   const options = {
     method: "GET",

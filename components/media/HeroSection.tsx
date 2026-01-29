@@ -8,8 +8,9 @@ import TrailerModal from "./TrailerModal";
 import type { MediaType, Genre } from "@/types/types";
 
 interface HeroSectionProps {
-  movie: MediaType;
-  trailerKey: string;
+  media: MediaType;
+  trailerKey: string | undefined;
+  type: string;
 }
 
 interface UniqueCrew {
@@ -24,17 +25,24 @@ interface UniqueMember {
   jobs: string[];
 }
 
-export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
+export default function HeroSection({
+  media,
+  trailerKey,
+  type,
+}: HeroSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const releaseDate = movie.release_date.split("-");
-  const country = movie.production_countries[0]?.iso_3166_1 || "US";
+  const releaseDate =
+    (media?.first_air_date as string).split("-") ||
+    media.release_date.split("-");
+  const country = media?.production_countries[0]?.iso_3166_1 || "US";
 
-  const importantMembers = movie.credits.crew.filter(
+  const importantMembers = media.credits.crew.filter(
     (member) =>
       member.job === "Director" ||
       member.job === "Screenplay" ||
-      member.job === "Writer",
+      member.job === "Writer" ||
+      member.job === "Creator",
   );
 
   const uniqueCrew: UniqueCrew = {};
@@ -55,14 +63,14 @@ export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
       <div className="relative">
         <div className="absolute w-full h-full z-10 bg-[#20200c]/80" />
         <Image
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}?append_to_response=credits`}
+          src={`https://image.tmdb.org/t/p/original${media.backdrop_path}?append_to_response=credits`}
           alt="backdrop"
           fill
           className="object-cover z-0"
         />
         <div className="relative flex z-20 p-10 gap-8 max-w-[1300px] mx-auto">
           <Image
-            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${media.poster_path}`}
             alt="poster"
             width={500}
             height={500}
@@ -70,24 +78,26 @@ export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
           />
           <div className="flex flex-col max-w-300 text-white">
             <h1 className="text-4xl font-bold flex gap-1">
-              {movie.title}
+              {media.title || media.name}
               <span className="text-gray-300 font-normal">
                 ({releaseDate[0]})
               </span>
             </h1>
 
-            <p>
-              {formateFullDate(movie.release_date, country)} &bull;{" "}
-              {movie.genres.map((genre: Genre) => {
-                return `${genre.name} `;
-              })}{" "}
-              &bull; {formateRuntime(movie.runtime)}
-            </p>
+            {type === "movie" && (
+              <p>
+                {formateFullDate(media.release_date, country)} &bull;{" "}
+                {media.genres.map((genre: Genre) => {
+                  return `${genre.name} `;
+                })}{" "}
+                &bull; {formateRuntime(media.runtime)}
+              </p>
+            )}
 
             <div className="flex items-center mt-5">
               <RatingCircle
                 size={70}
-                percentage={Math.floor(movie.vote_average * 10)}
+                percentage={Math.floor(media.vote_average * 10)}
               />
               <h1 className="ml-2 font-semibold text-xl">
                 User <br /> Score
@@ -108,16 +118,19 @@ export default function HeroSection({ movie, trailerKey }: HeroSectionProps) {
             )}
 
             {isOpen && (
-              <TrailerModal trailerKey={trailerKey} setIsOpen={setIsOpen} />
+              <TrailerModal
+                trailerKey={trailerKey as string}
+                setIsOpen={setIsOpen}
+              />
             )}
 
             <p className="text-xl text-neutral-400 italic py-5">
-              {movie.tagline}
+              {media.tagline}
             </p>
 
             <div>
               <h1 className="font-semibold text-xl">Overview</h1>
-              <p className="text-">{movie.overview}</p>
+              <p className="text-">{media.overview}</p>
             </div>
 
             <div className="flex justify-between max-w-md mt-10">

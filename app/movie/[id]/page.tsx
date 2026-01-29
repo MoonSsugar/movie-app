@@ -30,10 +30,10 @@ export default async function MoviePage({
 
   return (
     <>
-      <HeroSection movie={movie} trailerKey={trailer.key} />
+      <HeroSection media={movie} trailerKey={trailer.key} type="movie" />
       <CastCarousel cast={movie.credits.cast} />
       <Suspense fallback={<h1>Recommendations are loading...</h1>}>
-        <RecommendationsCarousel id={id} />
+        <RecommendationsCarousel id={id} type="movie"/>
       </Suspense>
     </>
   );
