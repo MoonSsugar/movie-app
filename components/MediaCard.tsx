@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formateDate } from "@/lib/formateDate";
+import { formatDate } from "@/lib/formatters";
 import RatingCircle from "./RatingCircle";
 import type { MediaType } from "@/types/types";
 
@@ -42,7 +42,7 @@ export default function MediaCard({ media, tab }: MediaCardProps) {
           </Link>
         </h1>
         <p className="text-gray-400">
-          {formateDate(media.release_date || (media.first_air_date as string))}
+          {formatDate(media.release_date || (media.first_air_date as string))}
         </p>
       </div>
     </div>

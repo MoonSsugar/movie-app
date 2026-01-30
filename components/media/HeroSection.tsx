@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { formateFullDate } from "@/lib/formateFullDate";
-import { formateRuntime } from "@/lib/formateRuntime";
+import { formatFullDate, formatRuntime } from "@/lib/formatters";
 import RatingCircle from "@/components/RatingCircle";
 import TrailerModal from "./TrailerModal";
 import type { MediaType, Genre } from "@/types/types";
@@ -86,11 +85,11 @@ export default function HeroSection({
 
             {type === "movie" && (
               <p>
-                {formateFullDate(media.release_date, country)} &bull;{" "}
+                {formatFullDate(media.release_date, country)} &bull;{" "}
                 {media.genres.map((genre: Genre) => {
                   return `${genre.name} `;
                 })}{" "}
-                &bull; {formateRuntime(media.runtime)}
+                &bull; {formatRuntime(media.runtime)}
               </p>
             )}
 
