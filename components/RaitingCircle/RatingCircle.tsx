@@ -49,6 +49,7 @@ export default function RatingCircle({ size, percentage }: RatingCircleProps) {
           fill="transparent"
           strokeDasharray={CIRCUMFERENCE}
           strokeDashoffset={dashOffset}
+          data-testid="progress-circle"
         />
       </svg>
 
