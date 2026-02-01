@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { formatFullDate, formatRuntime } from "@/lib/formatters";
-import RatingCircle from "@/components/RaitingCircle/RatingCircle";
+import RatingCircle from "@/components/RatingCircle/RatingCircle";
 import TrailerModal from "./TrailerModal";
 import type { MediaType, Genre } from "@/types/types";
 

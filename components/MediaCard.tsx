@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/lib/formatters";
-import RatingCircle from "./RaitingCircle/RatingCircle";
+import RatingCircle from "./RatingCircle/RatingCircle";
 import type { MediaType } from "@/types/types";
 
 interface MediaCardProps {
