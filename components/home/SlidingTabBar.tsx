@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import clsx from "clsx";
 
 interface SlidingTabBarProps {
@@ -24,7 +24,7 @@ export default function SlidingTabBar({
   const [tabUnderLineWidth, setTabUnderLineWidth] = useState(0);
   const [tabUnderLineLeft, setTabUnderLineLeft] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (activeTabIndex === null) {
       return;
     }

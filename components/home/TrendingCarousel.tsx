@@ -20,10 +20,7 @@ export default async function TrendingCarousel({
   };
 
   const trendingRes = await fetch(url, options);
-  const trendingMovies = await trendingRes.json();
-
-  console.log(trendingMovies)
-
+  const trendingMovies = await trendingRes.json()
   return (
     <section className="w-full pt-10">
       <div className="max-w-300 mx-auto">
